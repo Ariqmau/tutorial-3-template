@@ -43,8 +43,8 @@ func _physics_process(delta):
 		dash_timer -= delta
 		move_and_slide()
 		return
-	else:
-		is_dashing = false
+	
+	is_dashing = false
 
 	if Input.is_action_pressed("ui_down"):
 		if is_on_floor() or is_crouching:
