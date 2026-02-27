@@ -43,7 +43,7 @@ func _physics_process(delta):
 		dash_timer -= delta
 		move_and_slide()
 		return
-	
+
 	is_dashing = false
 
 	if Input.is_action_pressed("ui_down"):
