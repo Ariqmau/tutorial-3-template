@@ -1,14 +1,31 @@
 [gd_scene format=3 uid="uid://dsyfep1odrxje"]
 
 [ext_resource type="PackedScene" uid="uid://ds60n6krsavle" path="res://scenes/Ground.tscn" id="1_elqb8"]
+[ext_resource type="Texture2D" uid="uid://c11u1ot007np6" path="res://icon.png" id="1_rarhs"]
+[ext_resource type="PackedScene" uid="uid://bsl0snt670bdm" path="res://scenes/Wall.tscn" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://dvlyhuf4uyjqv" path="res://scenes/Player.tscn" id="2_rvslj"]
 
 [node name="Root" type="Node2D" unique_id=918599496]
 
+[node name="Icon" type="Sprite2D" parent="." unique_id=1249875665]
+position = Vector2(579, 261.00006)
+scale = Vector2(37.851563, 24.976563)
+texture = ExtResource("1_rarhs")
+
 [node name="Ground" parent="." unique_id=673580990 instance=ExtResource("1_elqb8")]
-position = Vector2(296, 324)
+position = Vector2(299, 484)
 
 [node name="Ground2" parent="." unique_id=1551337937 instance=ExtResource("1_elqb8")]
-position = Vector2(856, 324)
+position = Vector2(859, 484)
 
 [node name="Ground3" parent="." unique_id=1648397147 instance=ExtResource("1_elqb8")]
-position = Vector2(576, 394)
+position = Vector2(579, 554)
+
+[node name="Wall" parent="." unique_id=2052599629 instance=ExtResource("2_0bbpv")]
+position = Vector2(1000, 275)
+
+[node name="Wall2" parent="." unique_id=931053308 instance=ExtResource("2_0bbpv")]
+position = Vector2(158, 274)
+
+[node name="Player" parent="." unique_id=1429081910 instance=ExtResource("2_rvslj")]
+position = Vector2(294, 261)

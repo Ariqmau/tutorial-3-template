@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dvlyhuf4uyjqv"]
+
+[ext_resource type="Script" uid="uid://ccnt6deyykprd" path="res://scenes/Player.gd" id="1_v6fml"]
+[ext_resource type="Texture2D" uid="uid://d1ujqe7airurj" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_duck.png" id="2_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://dg3q4a7elmavw" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_idle.png" id="2_v6fml"]
+[ext_resource type="Texture2D" uid="uid://c1p5g33wabvfp" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_fall.png" id="3_khinc"]
+[ext_resource type="Texture2D" uid="uid://3h4607syxcrm" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_jump.png" id="5_bruh7"]
+[ext_resource type="Texture2D" uid="uid://cademvw3gv8rr" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_walk1.png" id="6_6eyey"]
+[ext_resource type="Texture2D" uid="uid://dmn8133tt40x1" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_walk2.png" id="7_d3wef"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
+size = Vector2(62, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
+size = Vector2(62, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4126"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cw2d6")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_khinc")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v6fml")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bruh7")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6eyey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d3wef")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=1429081910]
+script = ExtResource("1_v6fml")
+
+[node name="CollisionStanding" type="CollisionShape2D" parent="." unique_id=80650903]
+position = Vector2(1, 9)
+shape = SubResource("RectangleShape2D_v6fml")
+
+[node name="CollisionCrouching" type="CollisionShape2D" parent="." unique_id=1967272009]
+position = Vector2(1, 15)
+shape = SubResource("RectangleShape2D_3li8b")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1548779220]
+sprite_frames = SubResource("SpriteFrames_o4126")
+animation = &"crouch"
