@@ -21,6 +21,7 @@ var is_crouching = false
 @onready var collision_crouching = $CollisionCrouching
 @onready var anim = $AnimatedSprite2D
 
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += delta * gravity
