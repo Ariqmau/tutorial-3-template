@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://3h4607syxcrm" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_jump.png" id="5_bruh7"]
 [ext_resource type="Texture2D" uid="uid://cademvw3gv8rr" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_walk1.png" id="6_6eyey"]
 [ext_resource type="Texture2D" uid="uid://dmn8133tt40x1" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_walk2.png" id="7_d3wef"]
+[ext_resource type="AudioStream" uid="uid://tho3w6xl8d52" path="res://assets/audio/UGHH.wav" id="8_khinc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
 size = Vector2(62, 92)
@@ -61,6 +62,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1429081910]
+collision_layer = 2
 script = ExtResource("1_v6fml")
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="." unique_id=80650903]
@@ -74,4 +76,7 @@ disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1548779220]
 sprite_frames = SubResource("SpriteFrames_o4126")
-animation = &"crouch"
+animation = &"idle"
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="." unique_id=2016220697]
+stream = ExtResource("8_khinc")

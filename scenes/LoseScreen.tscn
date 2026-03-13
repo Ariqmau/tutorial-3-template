@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://qq1xrrqh8t3e"]
+
+[ext_resource type="Texture2D" uid="uid://cr7l5i76f2303" path="res://assets/dead.jpg" id="1"]
+[ext_resource type="Script" uid="uid://ft02ba8ahbrp" path="res://scenes/lose_screen.gd" id="1_x3j6d"]
+[ext_resource type="AudioStream" uid="uid://dfu3jco4ec6hx" path="res://assets/audio/horn_fail.wav" id="3_aeugc"]
+
+[node name="LoseScreen" type="Node2D" unique_id=286002002]
+script = ExtResource("1_x3j6d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1467227543]
+position = Vector2(584, 320)
+scale = Vector2(0.86428565, 0.76)
+texture = ExtResource("1")
+
+[node name="FailAudio" type="AudioStreamPlayer2D" parent="." unique_id=794781454]
+stream = ExtResource("3_aeugc")

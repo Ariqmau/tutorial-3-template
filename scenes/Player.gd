@@ -16,11 +16,16 @@ var last_input_dir = 0
 var tap_timer = 0.0
 var double_tap_window = 0.3
 var is_crouching = false
+var hp = 3
 
 @onready var collision_standing = $CollisionStanding
 @onready var collision_crouching = $CollisionCrouching
 @onready var anim = $AnimatedSprite2D
+@onready var hp_label = $"../CanvasLayer/HPLabel"
+@onready var hurt_audio = $HurtAudio
 
+func _ready():
+	hp_label.text = "HP: " + str(hp)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -107,3 +112,11 @@ func _physics_process(delta):
 			anim.play("fall")
 
 	move_and_slide()
+
+func take_damage():
+	hp -= 1
+	hp_label.text = "HP: " + str(hp)
+	hurt_audio.play()
+	
+	if hp <= 0:
+		get_tree().change_scene_to_file("res://scenes/LoseScreen.tscn")

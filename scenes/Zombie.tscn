@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://kqwtra5nwues"]
+
+[ext_resource type="Script" uid="uid://b8qrrxrlmjtow" path="res://scenes/zombie.gd" id="1_m83i4"]
+[ext_resource type="Texture2D" uid="uid://dvvkmshl5im4i" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_fall.png" id="2_v58xl"]
+[ext_resource type="Texture2D" uid="uid://j2wrs40clo4m" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_idle.png" id="3_dta2r"]
+[ext_resource type="Texture2D" uid="uid://c6ab5usovtwvg" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_jump.png" id="4_sl83e"]
+[ext_resource type="Texture2D" uid="uid://bvrk5ia7qa012" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk1.png" id="5_uff4m"]
+[ext_resource type="Texture2D" uid="uid://jnt42t5uwigs" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk2.png" id="6_ul75q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m83i4"]
+size = Vector2(62, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
+size = Vector2(62, 92)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4126"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v58xl")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dta2r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sl83e")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_uff4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ul75q")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Zombie" type="CharacterBody2D" unique_id=1429081910]
+collision_layer = 4
+script = ExtResource("1_m83i4")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1246621397]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=24397882]
+position = Vector2(1, 9)
+shape = SubResource("RectangleShape2D_m83i4")
+
+[node name="CollisionStanding" type="CollisionShape2D" parent="." unique_id=80650903]
+position = Vector2(1, 9)
+shape = SubResource("RectangleShape2D_v6fml")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1548779220]
+sprite_frames = SubResource("SpriteFrames_o4126")
+animation = &"idle"
+
+[node name="LedgeCheck" type="RayCast2D" parent="." unique_id=173830906]
+position = Vector2(-12, 0)
+target_position = Vector2(0, 65)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

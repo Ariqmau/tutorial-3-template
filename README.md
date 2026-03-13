@@ -1,3 +1,5 @@
+# Tutorial 3
+
 ## Fitur yang Diimplementasikan
 
 1. **Double Jump**: Pemain dapat melompat dua kali berturut-turut.
@@ -22,3 +24,35 @@ Prioritas pengecekan animasi di akhir fungsi `_physics_process`:
 * **Di lantai**: Cek apakah sedang jongkok (`crouch`), bergerak (`walk`), atau diam (`idle`).
 * **Di udara**: Cek arah vertikal untuk mendarat (`fall`) atau naik (`jump`).
 Arah pandang disesuaikan dengan mengubah properti `flip_h` berdasarkan *input* pergerakan.
+
+---
+
+# Tutorial 5
+
+## Fitur yang Diimplementasikan
+
+1. **Patroli Zombie**: Zombie bergerak bolak-balik secara otomatis, berbalik saat menabrak dinding, dan melompat di ujung pijakan.
+2. **Animasi Zombie**: Sinkronisasi animasi (Idle, Walk, Jump, Fall) menggunakan `AnimatedSprite2D`.
+3. **Collision Dinamis**: Pemisahan layer fisik agar karakter dan zombie tidak saling menabrak, tapi serangan tetap mengenai pemain.
+4. **Health Point (HP) & HUD**: Tampilan sisa HP di layar yang selalu mengikuti kamera menggunakan `CanvasLayer`.
+5. **Efek Audio**: Pemutaran suara saat terkena serangan (`UGHH.wav`) dan saat kalah (`horn_fail.wav`).
+6. **Game Over & Transisi Scene**: Layar otomatis berpindah ke `LoseScreen.tscn` saat HP habis dan melakukan *reset* level setelah beberapa detik.
+
+## Penjelasan Proses Pengerjaan
+
+### 1. Animasi dan Pergerakan Zombie
+Menggunakan node `AnimatedSprite2D` untuk memutar state animasi (Walk, Idle, Jump, Fall) sesuai kondisi. Pergerakan diatur oleh variabel `direction` yang berbalik nilai (`direction *= -1`) setiap kali `is_on_wall()` terdeteksi. Node `RayCast2D` (`LedgeCheck`) digunakan untuk mendeteksi ujung lantai agar zombie bisa melompat secara otomatis.
+
+### 2. Pengaturan Collision Layer & Mask
+
+Untuk menghindari benturan fisik (saling dorong) antara pemain dan zombie, pengaturan fisiknya dipisah:
+* **Ground**: Layer 1.
+* **Player**: Layer 2, Mask 1 (Hanya berpijak ke tanah).
+* **Zombie (Karakter)**: Layer 3, Mask 1 (Hanya berpijak ke tanah).
+* **Zombie (Hitbox Area2D)**: Tanpa Layer, dengan Mask 2. Ini berfungsi sebagai sensor khusus untuk mendeteksi sentuhan dengan Layer 2 (Player) tanpa menimbulkan efek dorongan fisik.
+
+### 3. Sistem HP dan UI (HUD)
+Variabel `hp` dideklarasikan pada script Player. Agar teks UI tidak ikut bergerak bersama karakter di *viewport*, node `Label` diletakkan di dalam `CanvasLayer` pada scene utama (`Main.tscn`). Script Player mengakses label ini menggunakan jalur *path* relatif (`$"../CanvasLayer/HPLabel"`) untuk memperbarui sisa HP di layar.
+
+### 4. Interaksi Damage dan Transisi Layar
+Sinyal `body_entered` dari Hitbox Zombie mendeteksi sentuhan dengan Player dan memanggil fungsi `take_damage()`. Fungsi ini akan mengurangi nilai HP, memutar `HurtAudio`, dan mengecek kondisi HP. Jika HP mencapai 0, `get_tree().change_scene_to_file()` dipanggil untuk memuat `LoseScreen.tscn`. Di scene layar kalah, suara `FailAudio` diputar secara otomatis, dan game dihentikan sejenak selama 2 detik menggunakan *coroutine* (`await get_tree().create_timer(2.0).timeout`) sebelum di-reset kembali ke scene level utama.

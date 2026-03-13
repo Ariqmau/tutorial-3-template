@@ -4,8 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://c11u1ot007np6" path="res://icon.png" id="1_rarhs"]
 [ext_resource type="PackedScene" uid="uid://bsl0snt670bdm" path="res://scenes/Wall.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dvlyhuf4uyjqv" path="res://scenes/Player.tscn" id="2_rvslj"]
+[ext_resource type="AudioStream" uid="uid://dpu7f88enu78f" path="res://assets/audio/assets_sound_bgm.wav" id="5_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://kqwtra5nwues" path="res://scenes/Zombie.tscn" id="6_c01mt"]
 
 [node name="Root" type="Node2D" unique_id=918599496]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1930358331]
+stream = ExtResource("5_vcsgt")
+autoplay = true
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1249875665]
 position = Vector2(579, 261.00006)
@@ -29,3 +35,15 @@ position = Vector2(158, 274)
 
 [node name="Player" parent="." unique_id=1429081910 instance=ExtResource("2_rvslj")]
 position = Vector2(294, 261)
+
+[node name="Zombie" parent="." unique_id=1482211459 instance=ExtResource("6_c01mt")]
+position = Vector2(894, 355)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=572700224]
+
+[node name="HPLabel" type="Label" parent="CanvasLayer" unique_id=218729331]
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 63.0
+offset_bottom = 34.0
+scale = Vector2(1.9027033, 2.6839721)
